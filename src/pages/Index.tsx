@@ -1,12 +1,13 @@
 
 import React, { useState, useEffect } from 'react';
-import { Helmet } from 'react-helmet';
 import Header from '../components/Header';
-import DoctorCard from '../components/DoctorCard';
 import FilterSidebar from '../components/FilterSidebar';
 import { getDoctors } from '../lib/api';
 import { Doctor, FilterOptions } from '../types';
-import { Button } from '@/components/ui/button';
+import SEO from '../components/SEO';
+import DoctorList from '../components/DoctorList';
+import DoctorPagination from '../components/DoctorPagination';
+import { HelmetProvider } from 'react-helmet-async';
 
 const Index: React.FC = () => {
   const [doctors, setDoctors] = useState<Doctor[]>([]);
@@ -67,34 +68,13 @@ const Index: React.FC = () => {
   };
 
   return (
-    <>
-      <Helmet>
-        <title>Find General Physicians & Internal Medicine Specialists | DoctorFinder</title>
-        <meta name="description" content="Consult with experienced General Physicians and Internal Medicine specialists. Book appointments online with top doctors for check-ups, consultations, and more." />
-        <meta name="keywords" content="general physician, internal medicine, doctor appointment, medical consultation, healthcare, specialist doctor" />
-        <link rel="canonical" href="https://www.doctorfinder.com/specialties/general-physician-internal-medicine" />
-        <meta property="og:title" content="Find General Physicians & Internal Medicine Specialists | DoctorFinder" />
-        <meta property="og:description" content="Book appointments with experienced General Physicians and Internal Medicine specialists for consultations, check-ups, and medical advice." />
-        <meta property="og:type" content="website" />
-        <meta property="og:url" content="https://www.doctorfinder.com/specialties/general-physician-internal-medicine" />
-        <meta name="twitter:card" content="summary_large_image" />
-        <meta name="twitter:title" content="Find General Physicians & Internal Medicine Specialists | DoctorFinder" />
-        <meta name="twitter:description" content="Book appointments with experienced General Physicians and Internal Medicine specialists for consultations, check-ups, and medical advice." />
-        <script type="application/ld+json">
-          {`
-            {
-              "@context": "https://schema.org",
-              "@type": "MedicalSpecialty",
-              "name": "General Physician & Internal Medicine",
-              "description": "Find and book appointments with General Physicians and Internal Medicine specialists.",
-              "medicalSpecialty": {
-                "@type": "MedicalSpecialty",
-                "name": "Internal Medicine"
-              }
-            }
-          `}
-        </script>
-      </Helmet>
+    <HelmetProvider>
+      <SEO 
+        title="Find General Physicians & Internal Medicine Specialists | DoctorFinder"
+        description="Consult with experienced General Physicians and Internal Medicine specialists. Book appointments online with top doctors for check-ups, consultations, and more."
+        keywords="general physician, internal medicine, doctor appointment, medical consultation, healthcare, specialist doctor"
+        canonicalUrl="https://www.doctorfinder.com/specialties/general-physician-internal-medicine"
+      />
       
       <div className="min-h-screen flex flex-col">
         <Header />
@@ -121,77 +101,19 @@ const Index: React.FC = () => {
             
             {/* Doctor Listings */}
             <div className="w-full lg:w-3/4">
-              {loading ? (
-                <div className="flex justify-center items-center h-64">
-                  <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-medical-600"></div>
-                </div>
-              ) : error ? (
-                <div className="bg-red-50 text-red-700 p-4 rounded-md text-center">
-                  {error}
-                </div>
-              ) : doctors.length === 0 ? (
-                <div className="bg-gray-50 p-8 text-center rounded-md">
-                  <h3 className="text-lg font-semibold mb-2">No doctors found</h3>
-                  <p className="text-gray-500 mb-4">Try adjusting your filters or search criteria.</p>
-                  <Button onClick={handleResetFilters}>Reset Filters</Button>
-                </div>
-              ) : (
-                <>
-                  <div className="mb-4 text-gray-600">
-                    Showing {doctors.length} of {totalDoctors} doctors
-                  </div>
-                  
-                  {doctors.map((doctor) => (
-                    <DoctorCard key={doctor.id} doctor={doctor} />
-                  ))}
-                  
-                  {/* Pagination */}
-                  {totalPages > 1 && (
-                    <div className="mt-8 flex justify-center">
-                      <nav aria-label="Page navigation">
-                        <ul className="flex items-center">
-                          <li>
-                            <Button
-                              variant="outline"
-                              size="sm"
-                              onClick={() => handlePageChange(Math.max(1, filters.page - 1))}
-                              disabled={filters.page === 1}
-                              className="mr-2"
-                            >
-                              Previous
-                            </Button>
-                          </li>
-                          
-                          {Array.from({ length: totalPages }, (_, i) => i + 1).map((page) => (
-                            <li key={page}>
-                              <Button
-                                variant={page === filters.page ? "default" : "outline"}
-                                size="sm"
-                                onClick={() => handlePageChange(page)}
-                                className="mx-1 w-10 h-10 p-0"
-                              >
-                                {page}
-                              </Button>
-                            </li>
-                          ))}
-                          
-                          <li>
-                            <Button
-                              variant="outline"
-                              size="sm"
-                              onClick={() => handlePageChange(Math.min(totalPages, filters.page + 1))}
-                              disabled={filters.page === totalPages}
-                              className="ml-2"
-                            >
-                              Next
-                            </Button>
-                          </li>
-                        </ul>
-                      </nav>
-                    </div>
-                  )}
-                </>
-              )}
+              <DoctorList 
+                doctors={doctors}
+                loading={loading}
+                error={error}
+                totalDoctors={totalDoctors}
+                onResetFilters={handleResetFilters}
+              />
+              
+              <DoctorPagination 
+                currentPage={filters.page}
+                totalPages={totalPages}
+                onPageChange={handlePageChange}
+              />
             </div>
           </div>
         </main>
@@ -207,7 +129,7 @@ const Index: React.FC = () => {
           </div>
         </footer>
       </div>
-    </>
+    </HelmetProvider>
   );
 };
 
