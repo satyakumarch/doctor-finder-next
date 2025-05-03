@@ -7,7 +7,6 @@ import { Doctor, FilterOptions } from '../types';
 import SEO from '../components/SEO';
 import DoctorList from '../components/DoctorList';
 import DoctorPagination from '../components/DoctorPagination';
-import { HelmetProvider } from 'react-helmet-async';
 
 const Index: React.FC = () => {
   const [doctors, setDoctors] = useState<Doctor[]>([]);
@@ -68,7 +67,7 @@ const Index: React.FC = () => {
   };
 
   return (
-    <HelmetProvider>
+    <>
       <SEO 
         title="Find General Physicians & Internal Medicine Specialists | DoctorFinder"
         description="Consult with experienced General Physicians and Internal Medicine specialists. Book appointments online with top doctors for check-ups, consultations, and more."
@@ -129,7 +128,7 @@ const Index: React.FC = () => {
           </div>
         </footer>
       </div>
-    </HelmetProvider>
+    </>
   );
 };
 
