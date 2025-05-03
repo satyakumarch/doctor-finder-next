@@ -7,7 +7,6 @@ import FilterSidebar from '../components/FilterSidebar';
 import { getDoctors } from '../lib/api';
 import { Doctor, FilterOptions } from '../types';
 import { Button } from '@/components/ui/button';
-import { Pagination } from '@/components/ui/pagination';
 
 const Index: React.FC = () => {
   const [doctors, setDoctors] = useState<Doctor[]>([]);
