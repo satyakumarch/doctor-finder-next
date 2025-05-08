@@ -16,7 +16,7 @@ const doctors: Doctor[] = [
     },
     clinicLocation: "Apollo Clinic, Sector 4, Gurgaon",
     consultationFees: 800,
-    photoUrl: "/placeholder.svg",
+    photoUrl: "/doctor1.jpg",
     languages: ["English", "Hindi"]
   },
   {
@@ -33,7 +33,7 @@ const doctors: Doctor[] = [
     },
     clinicLocation: "MediCare Clinic, Connaught Place, New Delhi",
     consultationFees: 600,
-    photoUrl: "/placeholder.svg",
+    photoUrl: "/doctor2.jpg",
     languages: ["English", "Hindi", "Punjabi"]
   },
   {
@@ -50,7 +50,7 @@ const doctors: Doctor[] = [
     },
     clinicLocation: "Mehta Medical Center, Vasant Kunj, New Delhi",
     consultationFees: 1200,
-    photoUrl: "/placeholder.svg",
+    photoUrl: "/doctor3.jpg",
     languages: ["English", "Hindi", "Gujarati"]
   },
   {
@@ -67,7 +67,7 @@ const doctors: Doctor[] = [
     },
     clinicLocation: "HealthFirst Clinic, Malviya Nagar, New Delhi",
     consultationFees: 700,
-    photoUrl: "/placeholder.svg",
+    photoUrl: "/doctor4.jpg",
     languages: ["English", "Hindi", "Marathi"]
   },
   {
@@ -84,7 +84,7 @@ const doctors: Doctor[] = [
     },
     clinicLocation: "Farooq Medical Centre, Okhla, New Delhi",
     consultationFees: 900,
-    photoUrl: "/placeholder.svg",
+    photoUrl: "/doctor4.jpg",
     languages: ["English", "Hindi", "Urdu"]
   },
   {
@@ -101,7 +101,7 @@ const doctors: Doctor[] = [
     },
     clinicLocation: "CityHealth Clinic, Greater Kailash, New Delhi",
     consultationFees: 500,
-    photoUrl: "/placeholder.svg",
+    photoUrl: "/doctor5.jpg",
     languages: ["English", "Hindi", "Telugu"]
   },
   {
@@ -118,7 +118,7 @@ const doctors: Doctor[] = [
     },
     clinicLocation: "Khanna Clinic, Dwarka, New Delhi",
     consultationFees: 650,
-    photoUrl: "/placeholder.svg",
+    photoUrl: "/doctor6.jpg",
     languages: ["English", "Hindi"]
   },
   {
@@ -135,7 +135,7 @@ const doctors: Doctor[] = [
     },
     clinicLocation: "Agarwal Medical Institute, Rohini, New Delhi",
     consultationFees: 1500,
-    photoUrl: "/placeholder.svg",
+    photoUrl: "/doctor7.jpg",
     languages: ["English", "Hindi"]
   }
 ];
